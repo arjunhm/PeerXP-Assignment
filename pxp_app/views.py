@@ -14,10 +14,16 @@ from pxp_app import api_funcs
 
 
 def home_view(request):
+    """
+    View for home page
+    """
     return render(request, 'pxp_app/home.html', {})
 
 
 def login_view(request):
+    """
+    View for logging in an user
+    """
     if request.method == 'POST':
 
         form = AuthenticationForm(data=request.POST)
@@ -37,13 +43,19 @@ def login_view(request):
 
 @login_required
 def logout_view(request):
-
+    """
+    View for logging an user out
+    """
     logout(request)
     return redirect('home-view')
 
 
 @login_required
 def add_ticket_view(request):
+    """
+    View for creating a ticket
+    """
+    
     user_obj = User.objects.get(name=str(request.user))
 
     if request.method == 'POST':
@@ -51,20 +63,13 @@ def add_ticket_view(request):
         form = NewTicketForm(request.POST)
         if form.is_valid():
             
-            department = form.cleaned_data['department']
-            category = form.cleaned_data['category']
-            subject = form.cleaned_data['subject']
-            description = form.cleaned_data['description']
-            priority = form.cleaned_data['priority']
-            url = form.cleaned_data['url']
+            # Creates a ticket using the form data along with user details
+            status_code = api_funcs.create_ticket(form.cleaned_data, user_obj)
+            
+            # If succesfully created a ticket
+            if status_code:
+                messages.add_message(request, messages.SUCCESS, 'Succesfully submitted ticket.')
 
-            ticket_obj = Ticket.objects.create(user=user_obj, department=department, category=category, url=url,
-                                               subject=subject, description=description, priority=priority)
- 
-
-            # api_funcs.create_ticket(form.cleaned_data, user_obj)
-
-            messages.add_message(request, messages.SUCCESS, 'Succesfully submitted ticket.')
             return redirect('add-ticket-view')
     else:
         form = NewTicketForm()
@@ -74,36 +79,39 @@ def add_ticket_view(request):
 
 @login_required
 def manage_tickets_view(request):
+    """
+    View for listing out all tickets submitted by a user
+    """
+
     user_obj = User.objects.get(name=str(request.user))
-    tickets = Ticket.objects.filter(user=user_obj)
 
-    # content = api_funcs.get_all_tickets()
-    # tickets = api_funcs.extract_content(content, user_obj)
-
-
+    # Fetch list of all tickets
+    content = api_funcs.get_all_tickets()
+    # Extract necessary details of tickets submitted by the user
+    tickets = api_funcs.extract_content(content, user_obj)
     return render(request, 'pxp_app/manage_tickets.html', {'tickets': tickets})
 
 
 def ticket_detail_view(request, pk):
+    """
+    View for viewing the details of a ticket
+    """
 
-    ticket = Ticket.objects.get(id=pk)
+    user_obj = User.objects.get(name=str(request.user))
 
-    # content = api_funcs.get_ticket_detail(pk)
-    # content = [content]
-    # ticket = api_funcs.extract_content(content)
+    ticket = api_funcs.get_ticket_detail(pk)
+    ticket['user'] = user_obj.name
 
+    # If update request is received
     if request.method == 'POST':
 
-        if ticket.status == 'Open':
-            ticket.status = 'Close'
-            # data = {'status': "Close"}
+        if ticket['status'] == 'Open':
+            data = {'status': "Closed"}
         else:
-            ticket.status = 'Open'
-            # data = {'status': "Open"}
-    
-        ticket.save()
+            data = {'status': "Open"}
         
-        # api_funcs.update_ticket(data, pk)
+        # updates the status of a ticket        
+        api_funcs.update_ticket(data, pk)
 
         return redirect('manage-tickets-view')
 
@@ -111,8 +119,9 @@ def ticket_detail_view(request, pk):
 
 
 def ticket_delete_view(request, pk):
+    """
+    View for deleting a ticket
+    """
 
-    ticket = Ticket.objects.get(id=pk)
-    ticket.delete()
-    # api_funcs.delete_ticket(pk)
+    api_funcs.delete_ticket(pk)
     return redirect('manage-tickets-view')

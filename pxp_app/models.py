@@ -3,8 +3,8 @@ from django.contrib.auth.models import AbstractUser
 
 
 DEPT_CHOICES = (
-    ('PWSLab DevOps Support', 'PWSLab DevOps Support'),
-    ('iSupport', 'iSupport'),
+    ('7189000001062045', 'PWSLab DevOps Support'),
+    ('7189000000051431', 'iSupport'),
 )
 
 CATEGORY_CHOICES = (
@@ -20,9 +20,9 @@ CATEGORY_CHOICES = (
 )
 
 PRIORITY_CHOICES = (
-    ('High', 'High'),
-    ('Medium', 'Medium'),
-    ('Low', 'Low'),
+    ('High', 'High - Production System Down'),
+    ('Medium', 'Medium - System Impaired'),
+    ('Low', 'Low - General Guidance'),
 )
 
 
