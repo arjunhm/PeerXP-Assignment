@@ -20,9 +20,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open('.env') as f:
-    SECRET_KEY = f.read().strip()
+import env
 
+SECRET_KEY = env.SECRET_KEY
+AUTH_TOKEN = env.AUTH_TOKEN
+ORG_ID = env.ORG_ID
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -125,5 +127,3 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'pxp_app.User'
 
 LOGIN_URL = '/login/'
-
-AUTH_TOKEN = "0123456789"
