@@ -4,7 +4,7 @@
 ```pip install -r requirements.txt```
 
 ## Run the server
-Change directory to the project root and run the followin command  
+Change directory to the project root and run the following command  
 ``` python manage.py runserver```
 
 ## API Functions
