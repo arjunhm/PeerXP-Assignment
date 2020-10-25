@@ -14,7 +14,7 @@
 
             <div class="ticket-header">
                 <p class="ticket-subject"><a href="{% url 'ticket-detail-view' ticket.id %}">{{ticket.subject}}</a></p>
-                <p class="ticket-id"># {{ticket.id}}</p>
+                <p class="ticket-id"># {{ ticket.ticketNumber }}</p>
             </div>
 
             <div class="ticket-content">
@@ -28,9 +28,9 @@
                 <p><a href="{{ ticket.url }}" target="_blank"><i class="fa fa-chain" style="font-size:16px; color: black;"></i></a></p> 
                 <p>-</p>
                
-                {% if ticket.status == "open" %}
+                {% if ticket.status == "Open" %}
                     <p class='ticket-status'><img src="{% static 'icons/tick-undone.png' %}" alt="tick-grey"></p>
-                {% elif ticket.status == "close" %}
+                {% elif ticket.status == "Closed" %}
                     <p class='ticket-status'><img src="{% static 'icons/tick-done.png' %}" alt="tick-green"></p>
                 {% endif %}
                 
@@ -41,5 +41,5 @@
 
 </div>
 
-<div>Icons made by <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+<!-- <div>Icons made by <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
 {% endblock %}

@@ -266,6 +266,13 @@ input:focus, select:focus, textarea:focus{
 
 /* Ticket details */
 
+.ticket-subheader{
+  margin-bottom: 20px;
+  border-radius: 30px;
+  background-color: #eee;
+  
+}
+
 .ticket-detail{
   background-color: #eee;
   padding: 20px;
@@ -294,6 +301,7 @@ input:focus, select:focus, textarea:focus{
   border-radius: 7px;
 
   margin-bottom: 50px;
+
 }
 
 .close-ticket-button{
