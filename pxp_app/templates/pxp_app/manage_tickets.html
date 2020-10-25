@@ -1,0 +1,45 @@
+{% extends 'pxp_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="main-title">Ticket Management</h1>
+</div>
+
+<div class="container">
+
+    <div class="ticket-container">
+        {% for ticket in tickets %}
+        <div class="ticket-card">
+
+            <div class="ticket-header">
+                <p class="ticket-subject"><a href="{% url 'ticket-detail-view' ticket.id %}">{{ticket.subject}}</a></p>
+                <p class="ticket-id"># {{ticket.id}}</p>
+            </div>
+
+            <div class="ticket-content">
+                
+                <p class="{{ ticket.priority }}">{{ ticket.priority }}</p>
+                <p>-</p>
+                <p>{{ ticket.department }}</p>
+                <p>-</p>
+                <p>{{ ticket.category }}</p>
+                <p>-</p>
+                <p><a href="{{ ticket.url }}" target="_blank"><i class="fa fa-chain" style="font-size:16px; color: black;"></i></a></p> 
+                <p>-</p>
+               
+                {% if ticket.status == "open" %}
+                    <p class='ticket-status'><img src="{% static 'icons/tick-undone.png' %}" alt="tick-grey"></p>
+                {% elif ticket.status == "close" %}
+                    <p class='ticket-status'><img src="{% static 'icons/tick-done.png' %}" alt="tick-green"></p>
+                {% endif %}
+                
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<div>Icons made by <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+{% endblock %}

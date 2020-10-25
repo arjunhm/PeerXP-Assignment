@@ -1,0 +1,51 @@
+{% extends 'pxp_app/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1 class="main-title"></h1>
+</div>
+
+<div class="container">
+
+
+  {% if messages %}
+    <div id="message-card">
+        {% for message in messages %}
+        <p{% if message.tags %} class="{{ message.tags }}"{% endif %} onclick="this.fadeOut(2000);">{{ message }} <img src="{% static 'icons/tick-done.png' %}" alt=""> </p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+
+
+    <form action="{% url 'add-ticket-view' %}" method="POST" id="ticket-form">
+        {% csrf_token %}
+        <h1 class="form-title">Submit Ticket</h1>
+
+        
+        <!-- Ticket Details -->
+        <h2>Ticket Details</h2>
+        {{ form.as_p }}
+
+        <!-- Contact Details -->
+        <h2>Contact Details</h2>
+            <p>
+            <label for="name">Contact Name:</label>
+            <input type="text" name="name" id="name" value="{{ user_obj.name }}" class="ignore-discard" disabled>
+        </p>
+
+        <p>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" value="{{ user_obj.email }}" class="ignore-discard" disabled>
+        </p>
+        
+        <!-- Submit -->
+        <input type="submit" value="Submit ticket" id="form-submit" class="ignore-discard" onclick="return confirm('Submit ticket?');">
+        <button id="form-discard">Discard</button>
+    
+    </form>
+</div>
+
+{% endblock %}

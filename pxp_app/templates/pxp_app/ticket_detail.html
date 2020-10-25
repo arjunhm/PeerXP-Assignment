@@ -1,0 +1,42 @@
+{% extends 'pxp_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="main-title">Ticket Management</h1>
+</div>
+
+<div class="container">
+
+    <div class="ticket-container">
+        <div class="ticket-header">
+            <p class="ticket-subject" style="font-size: 36px;">{{ticket.subject}}</p>
+            <p class="ticket-id">#{{ticket.id}}</p>
+        </div>
+        <div class="ticket-header">
+            <p>Link: <a href="{{ ticket.url }}" target="_blank"><i class="fa fa-chain" style="font-size:16px; color: black;"></i></a></p>
+            <p>{{ ticket.category }}</p>
+            <p>{{ ticket.user }}</p>
+        </div>
+        <div class="ticket-detail">
+            {{ ticket.description }}
+        </div>
+
+
+        <div class="ticket-options">
+            <form action="{% url 'ticket-detail-view' ticket.id %}" method="POSt">
+                {% csrf_token %}
+                {% if ticket.status == 'open' %}
+                    <button type='submit' class="close-ticket-button">Close Ticket</button>
+                {% else %}
+                    <button type='submit' class="reopen-ticket-button">Re-open Ticket</button>
+                {% endif %}
+            </form>
+
+            <button class="delete-ticket-button" onclick="return confirm('Are you sure?');"><a href="{% url 'ticket-delete-view' ticket.id %}">Delete Ticket</a></button>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

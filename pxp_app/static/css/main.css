@@ -1,0 +1,315 @@
+*{
+    box-sizing: border-box;
+}
+
+:root {
+  --main-theme-color: #4c45b3;
+  --sub-theme-color: #6c63ff;
+  
+    /* Fonts */
+  --header-font: 'Raleway'; /* 400 */
+  --title-font: 'Fira Sans'; /* 300 400*/
+  --body-font: 'OpenSans';
+
+}
+
+body{
+  font-family: 'Fira Sans';
+  background-color: #e2e0ff;
+}
+
+
+/* Navigation Bar */
+
+.topnav{
+    background-color: var(--main-theme-color);
+    overflow: hidden;
+
+    margin-top: -10px;
+    margin-left: -10px;
+    margin-right: -8px;
+}
+
+.topnav a {
+  float: left;
+  padding: 14px 16px;
+  margin-bottom: -2.5px;
+
+  text-align: center;
+  text-decoration: none;
+
+  font-size: 17px;
+  color: #eee;
+}
+
+.topnav-right {
+  float: right;
+}
+
+.topnav a:hover {
+  background-color: var(--sub-theme-color);
+  color: #111;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: #eee;
+  padding: 14px 16px;
+  background-color: var(--main-theme-color);
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--main-theme-color);
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: #eee;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: var(--sub-theme-color);
+  color: #111;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+  color: #111;
+}
+
+/* Misc */
+
+a{
+  text-decoration: none;
+}
+
+topnav a:visited{
+  color: #eee;
+}
+
+.dropbtn:hover{
+  background-color: var(--sub-theme-color);
+  color: #111;
+}
+
+
+.page-header{
+  text-align: center;
+  height: 100px;
+}
+
+.container{
+  margin: 0 auto;
+  width: 80%;
+}
+
+
+/* Form */
+
+#ticket-form, #login-form{
+  margin: 0 auto;
+  width: 50%;
+  background-color: #fff;
+  padding: 10px;
+  padding-left: 40px;
+  font-family: 'Raleway';
+  border-radius: 30px;
+}
+
+.form-title{
+  padding-left: -40px;  
+}
+
+
+label{
+  min-width: 110px;
+  display: block;
+}
+
+textarea {
+   resize: none;
+}
+
+input, select, textarea{
+  margin-bottom: 2%;
+}
+
+#form-submit{
+  border: none;
+  border-radius: 5px;
+  background-color: var(--sub-theme-color);
+  color: white;
+  height: 30px;
+}
+
+#form-discard{
+  border: none;
+  border-radius: 5px;
+  background-color: #fff;
+  color: var(--sub-theme-color);
+  height: 30px;
+  margin-left: 20px;
+  width: auto;
+}
+
+#form-discard:hover{
+  transform: scale(1.1);
+}
+
+
+input:focus, select:focus, textarea:focus{
+  outline: none;
+}
+
+#message-card{
+  position: fixed;
+  margin: 0 auto;
+  width: 20%;
+  text-align: center;
+  top: 10%;
+  right: 40%;
+  background-color: #bbb;
+  z-index: 100;
+}
+
+/* Manage Tickets */
+
+.ticket-container{
+  margin: 0 auto;
+  
+  width: 75%;
+  
+  padding-top: 30px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket-card{
+  margin: 0 auto;
+  margin-bottom: 5%;
+
+  width: 90%;
+  /* height: 100px; */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background-color: #eee;
+  border-radius: 30px;
+}
+
+.ticket-header{
+  padding: 0 20px;
+  height: 65%;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 1.35em;
+
+  color: var(--main-theme-color)
+}
+
+.ticket-content{
+  height: 35%;
+
+  margin-left: 30px;
+  margin-bottom: 5px;
+
+  padding: 0 20px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.ticket-subject > a{
+  color: var(--main-theme-color)
+}
+
+.High{
+  color: #e63946;
+}
+
+.Medium{
+  color: #ffaa00;
+}
+
+.Low{
+  color: #00b4d8;
+}
+
+
+/* Ticket details */
+
+.ticket-detail{
+  background-color: #eee;
+  padding: 20px;
+}
+
+
+.hide-card{
+  opacity: 0;
+}
+
+.ticket-options{
+  margin: 0 auto;
+  margin-top: 30px;
+
+  width: 50%;
+
+  display: flex;
+  justify-content: space-around;
+}
+
+.ticket-options button{
+  border: none;
+  outline: none;
+
+  height: 2.2em;
+  border-radius: 7px;
+
+  margin-bottom: 50px;
+}
+
+.close-ticket-button{
+  background-color: #55a630;
+  color: #fff;
+}
+
+.reopen-ticket-button{
+  background-color: #f8961e;
+}
+
+.delete-ticket-button{
+  background-color: #e56b6f;
+  color: white;
+}
+
+.delete-ticket-button a, .delete-ticket-button a:visited{
+  color: #fff;
+}

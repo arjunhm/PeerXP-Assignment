@@ -1,0 +1,16 @@
+{% extends 'pxp_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="main-title">User Login</h1>
+</div>
+
+<div class="container">
+    <form action="{% url 'login-view' %}" method="POST" id="login-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" name="form-submit" value="Login" id="form-submit">
+    </form>
+</div>
+{% endblock %}
